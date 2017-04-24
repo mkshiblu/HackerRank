@@ -1,0 +1,10 @@
+SELECT b1.N AS N--b1.N AS N, b1.P AS P, COUNT(B2.N) AS NC --B2.N AS NC 
+	, CASE
+		WHEN b1.P IS NULL THEN 'Root'
+		WHEN COUNT(B2.N) = 0 THEN 'Leaf'
+		ELSE 'Inner'
+	  END AS [type]
+FROM BST AS b1
+LEFT JOIN BST AS b2 ON (b2.P = b1.N)
+GROUP BY b1.N, b1.P
+ORDER BY b1.N;
